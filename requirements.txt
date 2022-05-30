@@ -6,3 +6,5 @@ tqdm
 sklearn
 streamlit
 tldextract
+regex
+nltk
