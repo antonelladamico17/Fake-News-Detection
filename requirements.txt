@@ -7,9 +7,5 @@ tqdm
 pyquery
 requests
 interruptingcow 
-sklearn
-jedi
-keras
-tensorflow
+scikit_learn
 streamlit
-watchdogs
