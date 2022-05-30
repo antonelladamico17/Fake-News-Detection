@@ -7,5 +7,5 @@ tqdm
 pyquery
 requests
 interruptingcow 
-scikit_learn
+sklearn
 streamlit
