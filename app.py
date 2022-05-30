@@ -107,6 +107,9 @@ if __name__ == '__main__':
         
         
         if submit and user_input!="":
-		    pred = model.predict(prova)
-		    st.header("Type of URL : "+pred)
-		    st.subheader("What is a "+pred+" URL?")
+		pred = model.predict(prova)
+		st.header("Type of URL : "+pred)
+		st.subheader("What is a "+pred+" URL?")
+			
+	if (pred=="0"):
+		st.text("These URLs are generally harmless and non-malicious.")
