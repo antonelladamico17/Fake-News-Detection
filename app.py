@@ -5,7 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 import sklearn
 import pickle
-import data_creation_v3 as d
+import data_creation as d
 from tensorflow.keras.models import load_model
 import streamlit as st
 import time
