@@ -10,3 +10,4 @@ interruptingcow
 sklearn
 streamlit
 tldextract
+regex
