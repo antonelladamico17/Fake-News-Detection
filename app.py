@@ -30,6 +30,7 @@ smote = SMOTE()
 
 warnings.filterwarnings("ignore")
 
+DATA_PATH = 'pickle'
 
 def parse_url(url: str) -> Optional[Dict[str, str]]:
     try:
@@ -100,3 +101,11 @@ if __name__ == '__main__':
         prova.drop('params', axis=1, inplace=True)
         prova.drop('query', axis=1, inplace=True)
         prova.drop('fragment', axis=1, inplace=True)
+        
+        model = pickle.load(open(Path(path, "svc_clf.pkl"), "rb"))
+        
+        
+        if submit and user_input!="":
+		    pred = model.predict(prova)
+		    st.header("Type of URL : "+pred)
+		    st.subheader("What is a "+pred+" URL?")
