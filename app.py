@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import numpy as np
+import sklearn
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
