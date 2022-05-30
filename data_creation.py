@@ -8,7 +8,7 @@ import tldextract
 import warnings
 import regex as re
 from typing import *
-
+from nltk.tokenize import RegexpTokenizer
 
 def parse_url(url: str) -> Optional[Dict[str, str]]:
     try:
