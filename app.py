@@ -93,6 +93,7 @@ if __name__ == '__main__':
         prova['num_subdomains'] = prova['netloc'].apply(lambda net: get_num_subdomains(net))
         prova['domain_tokens'] = prova['netloc'].apply(lambda net: tokenize_domain(net))
         prova['path_tokens'] = prova['path'].apply(lambda path: " ".join(map(str,tokenizer.tokenize(path))))
+	
         
         prova.drop('url', axis=1, inplace=True)
         prova.drop('scheme', axis=1, inplace=True)
