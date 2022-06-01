@@ -1,2 +1,2 @@
-from bs4 import BeautifulSoup
+bs4
 urlopen
