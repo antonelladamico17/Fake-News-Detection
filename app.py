@@ -113,7 +113,7 @@ def main():
 	if user_input == '':
 		st.text('Enter URL, plese')
 	else:
-		soup = BeautifulSoup(urlopen(user_input), features= "html.parser")
+		soup = BeautifulSoup(urlopen(user_input)
 		
 		df = [user_input]
 		df = pd.DataFrame(df, columns = ['url'])
