@@ -152,6 +152,16 @@ def main():
 		df['num_subdomains'] = df['netloc'].apply(lambda net: get_num_subdomains(net))
 		df['domain_tokens'] = df['netloc'].apply(lambda net: tokenize_domain(net))
 		df['path_tokens'] = df['path'].apply(lambda path: " ".join(map(str,tokenizer.tokenize(path))))
+		
+		
+		df.drop('url', axis=1, inplace=True)
+		df.drop('scheme', axis=1, inplace=True)
+		df.drop('netloc', axis=1, inplace=True)
+		df.drop('path', axis=1, inplace=True)
+		df.drop('params', axis=1, inplace=True)
+		df.drop('query', axis=1, inplace=True)
+		df.drop('fragment', axis=1, inplace=True)
+		df.drop('title', axis = 1, inplace = True)
 
 		st.text(str(df['title']))
 		st.dataframe(df)
