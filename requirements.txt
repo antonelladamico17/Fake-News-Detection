@@ -5,3 +5,4 @@ nltk
 pandas
 parse
 text2emotion 
+tldextract
