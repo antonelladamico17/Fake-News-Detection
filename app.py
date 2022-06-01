@@ -6,7 +6,7 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 st.set_page_config(page_title="Fake News detector", layout="centered")
 
 def main():
-	st.title("Fake Newd Detector")
+	st.title("Fake News Detector")
 	st.write("__________________")
 	st.text("Enter URL")
 
@@ -15,8 +15,8 @@ def main():
 	choice = st.sidebar.selectbox('Menu',menu)
 	if choice == 'Home':
 		st.subheader("Streamlit From Colab")	
-
-
+		
+	user_input = st.text_input("Enter URL:")
 
 if __name__ == '__main__':
 	main()
