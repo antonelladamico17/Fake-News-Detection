@@ -163,7 +163,7 @@ def main():
 		df.drop('fragment', axis=1, inplace=True)
 		df.drop('title', axis = 1, inplace = True)
 
-		st.text(str(df['title']))
+		
 		st.dataframe(df)
 		
 
