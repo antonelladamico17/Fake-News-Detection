@@ -104,7 +104,6 @@ def main():
 				
 				
 		st.text(str(df['title']))
-		st.text(str(df["parsed_url"]))
 		st.text(str(df))
 
 if __name__ == '__main__':
