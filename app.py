@@ -99,7 +99,7 @@ def main():
 		df = pd.concat([
 			df.drop(['parsed_url'], axis=1),
 			df['parsed_url'].apply(pd.Series)
-		], axis=1])
+		], axis=1)
 		
 				
 				
