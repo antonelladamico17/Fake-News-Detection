@@ -90,7 +90,18 @@ def emotion_detection(sents):
     return sent_emotion
 
 
+def get_num_subdomains(netloc: str) -> int:
+    subdomain = tldextract.extract(netloc).subdomain 
+    if subdomain == "":
+        return 0
+    return subdomain.count('.') + 1
 
+
+tokenizer = RegexpTokenizer(r'[A-Za-z]+')
+def tokenize_domain(netloc: str) -> str:
+    split_domain = tldextract.extract(netloc)
+    no_tld = str(split_domain.subdomain +'.'+ split_domain.domain)
+    return " ".join(map(str,tokenizer.tokenize(no_tld)))
 
 
 
@@ -128,7 +139,19 @@ def main():
 		polarity_Score = pd.DataFrame(polarity_Score)
 		df = pd.concat([df, polarity_Score], axis = 1)
 		df = df.drop(['compound'], axis = 1)
-				
+		
+		
+		df["length"] = df.url.str.len()
+		df["tld"] = df.netloc.apply(lambda nl: tldextract.extract(nl).suffix)
+		df['tld'] = df['tld'].replace('','None')
+		df['slashes'] = df.path.str.count('/')
+		df['digit'] = df.url.str.count('\d')
+		df['hypen'] = df.url.str.count('-')
+		
+		df['num_subdomains'] = df['netloc'].apply(lambda net: get_num_subdomains(net))
+		df['domain_tokens'] = df['netloc'].apply(lambda net: tokenize_domain(net))
+		df['path_tokens'] = df['path'].apply(lambda path: " ".join(map(str,tokenizer.tokenize(path))))
+
 		st.text(str(df['title']))
 		st.dataframe(df)
 		
