@@ -1,5 +1,7 @@
 import streamlit as st
 import os
+import pandas as pd
+import text2emotion as te
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from unidecode import unidecode
@@ -7,18 +9,18 @@ from nltk.tokenize import word_tokenize
 import re
 from urllib.parse import urlparse
 import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
-stop_words = nltk.corpus.stopwords.words('english')
-from nltk.stem import WordNetLemmatizer
-lemmatizer = WordNetLemmatizer()
-import pandas as pd
-import text2emotion as te
 nltk.download('vader_lexicon')
+stop_words = nltk.corpus.stopwords.words('english')
+lemmatizer = WordNetLemmatizer()
 sid = SentimentIntensityAnalyzer()
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
