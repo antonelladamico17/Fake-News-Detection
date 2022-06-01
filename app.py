@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import pandas as pd
+import tldextract
 import text2emotion as te
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
