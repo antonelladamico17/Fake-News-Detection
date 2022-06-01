@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 from nltk.tokenize import word_tokenize
 import re
+from urllib.parse import urlparse
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
