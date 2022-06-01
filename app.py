@@ -15,6 +15,7 @@ stop_words = nltk.corpus.stopwords.words('english')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pandas as pd
+import text2emotion as te
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
@@ -78,6 +79,14 @@ def parse_url(url: str):
 
 
 
+def emotion_detection(sents):
+    """Main algo for convertion for the 5 emotions """
+    sent_emotion = te.get_emotion(sents) # prende il testo 
+    return sent_emotion
+
+
+
+
 
 
 def main():
@@ -101,7 +110,12 @@ def main():
 			df['parsed_url'].apply(pd.Series)
 		], axis=1)
 		
-				
+		emotion_list = []
+		for i, row in df.iterrows():
+    			emotion_dict = emotion_detection(row[1])
+    			emotion_list.append(emotion_dict)
+		emotion_df = pd.DataFrame(emotion_list)
+		df = pd.concat([df, emotion_df], axis = 1)
 				
 		st.text(str(df['title']))
 		st.text(str(df))
