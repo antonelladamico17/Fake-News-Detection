@@ -49,6 +49,36 @@ def clean_text(text):
   return tokenized_texts
 
 
+def parse_url(url: str):
+    try:
+        no_scheme = not url.startswith('https://') and not url.startswith('http://')
+        if no_scheme:
+            parsed_url = urlparse(f"http://{url}")
+            return {
+                "scheme": None, # not established a value for this
+                "netloc": parsed_url.netloc,
+                "path": parsed_url.path,
+                "params": parsed_url.params,
+                "query": parsed_url.query,
+                "fragment": parsed_url.fragment,
+            }
+        else:
+            parsed_url = urlparse(url)
+            return {
+                "scheme": parsed_url.scheme,
+                "netloc": parsed_url.netloc,
+                "path": parsed_url.path,
+                "params": parsed_url.params,
+                "query": parsed_url.query,
+                "fragment": parsed_url.fragment,
+            }
+    except:
+        return None
+
+
+
+
+
 def main():
 	st.title("Fake News Detector")
 	st.write("__________________")
