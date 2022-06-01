@@ -1,6 +1,7 @@
 import streamlit as st
 import os
-
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
