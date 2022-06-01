@@ -63,7 +63,7 @@ def main():
 		df = pd.DataFrame(df, columns = ['url'])
 		df['title'] = soup.title.get_text()
 		
-		df['title'] = clean_text(df['title'])
+		df['title'] = df['title'].apply(lambda x: clean_text(x))
 		st.text(str(df['title']))
 
 if __name__ == '__main__':
