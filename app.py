@@ -96,8 +96,11 @@ def main():
 		
 		df['title'] = df['title'].apply(lambda x: clean_text(x))
 		df["parsed_url"] = df.url.apply(parse_url)
-		df = pd.concat([df.drop(['parsed_url'], axis=1),
-				df['parsed_url'].apply(pd.Series), axis=1])
+		df = pd.concat([
+			df.drop(['parsed_url'], axis=1),
+			df['parsed_url'].apply(pd.Series)
+		], axis=1])
+		
 				
 				
 		st.text(str(df['title']))
