@@ -64,7 +64,9 @@ def main():
 		df['title'] = soup.title.get_text()
 		
 		df['title'] = df['title'].apply(lambda x: clean_text(x))
+		df["parsed_url"] = df.url.apply(parse_url)
 		st.text(str(df['title']))
+		st.text(str(df["parsed_url"]))
 
 if __name__ == '__main__':
 	main()
