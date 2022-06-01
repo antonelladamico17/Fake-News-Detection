@@ -7,6 +7,36 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 st.set_page_config(page_title="Fake News detector", layout="centered")
 
+def clean_text(text):
+
+  text = text.lower()
+  text = text.strip() # Remove spaces at the beginning and at the end of the string
+  text = re.sub("([0-9]+(?:st|nd|rd|th)+)", " ", text) # Remove ordinal numbers
+  text = re.sub("(?!5g)[^a-zA-Z]", " ", text) # Remove numbers and punctuation. Exclude 5g because it is part of our main search keyword
+  text = re.sub("\s+", " ", text) # Remove extra space
+  text = re.sub("\d+(\.\d+)?","num", text)
+  text = re.sub("s/^\s+.*\s+$//", " ", text) # Remove leading and trailing whitespaces
+  text = re.sub(r"\b[a-zA-Z]\b", " ", text) # Remove single characters
+
+  text = unidecode(re.sub("\s+", " ", text.strip())) # Remove any additional whitespace
+  text = text.strip()
+  
+  text = text.replace("numg", str('fiveg')) # Replace the trasformation of 5G -> numg -> with fiveg in order to appear in the df
+
+  tokenized_texts = []
+
+  document = word_tokenize(text)
+
+  for token in document:
+    if token not in stop_words and len(token) > 1:
+
+      tokenized_texts.append(lemmatizer.lemmatize(token))
+  
+  tokenized_texts = ' '.join([w for w in tokenized_texts if len(w) > 2 ])
+
+  return tokenized_texts
+
+
 def main():
 	st.title("Fake News Detector")
 	st.write("__________________")
@@ -18,6 +48,8 @@ def main():
 		soup = BeautifulSoup(urlopen(user_input))
 		title = soup.title.get_text()
 		st.text(str(title))
+		clean = clean_text(title)
+		st.text(str(clean))
 
 if __name__ == '__main__':
 	main()
