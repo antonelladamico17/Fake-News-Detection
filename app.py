@@ -13,6 +13,7 @@ nltk.download('omw-1.4')
 stop_words = nltk.corpus.stopwords.words('english')
 from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
+import pandas as pd
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
