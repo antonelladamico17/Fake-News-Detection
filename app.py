@@ -1,5 +1,9 @@
 import streamlit as st
 
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+st.set_page_config(page_title="Fake News detector", layout="centered")
+
 def main():
 	st.title("Awesome Streamlit for ML")
 	st.subheader("How to run streamlit from colab")
