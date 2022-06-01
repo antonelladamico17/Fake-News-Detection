@@ -12,10 +12,12 @@ def main():
 	st.write("__________________")
 
 	user_input = st.text_input("Enter URL:")
-	
-	soup = BeautifulSoup(urlopen(user_input))
-	title = soup.title.get_text()
-	st.text(str(title))
+	if user_input == '':
+		st.text('Enter URL, plese')
+	else:
+		soup = BeautifulSoup(urlopen(user_input))
+		title = soup.title.get_text()
+		st.text(str(title))
 
 if __name__ == '__main__':
 	main()
