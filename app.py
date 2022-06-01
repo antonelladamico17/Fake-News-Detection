@@ -16,6 +16,9 @@ from nltk.stem import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 import pandas as pd
 import text2emotion as te
+nltk.download('vader_lexicon')
+sid = SentimentIntensityAnalyzer()
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
@@ -116,9 +119,14 @@ def main():
     			emotion_list.append(emotion_dict)
 		emotion_df = pd.DataFrame(emotion_list)
 		df = pd.concat([df, emotion_df], axis = 1)
+		polarity_Score = []
+		for i, row in df.iterrows():
+    			score = sid.polarity_scores(row[1])
+    			polarity_Score.append(score)
 				
 		st.text(str(df['title']))
 		st.text(str(df))
+		
 
 if __name__ == '__main__':
 	main()
