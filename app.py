@@ -56,11 +56,14 @@ def main():
 	if user_input == '':
 		st.text('Enter URL, plese')
 	else:
-		soup = BeautifulSoup(urlopen(user_input))
-		title = soup.title.get_text()
-		st.text(str(title))
-		clean = clean_text(title)
-		st.text(str(clean))
+		soup = BeautifulSoup(urlopen(user_input)))
+		
+		df = [user_input]
+		df = pd.DataFrame(df, columns = ['url'])
+		df['title'] = soup.title.get_text()
+		
+		df['title'] = clean_text(df['title'])
+		st.text(str(df['title']))
 
 if __name__ == '__main__':
 	main()
