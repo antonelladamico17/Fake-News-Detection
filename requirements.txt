@@ -1,2 +1,2 @@
-beautifulsoup4
-urlopen
+bs4
+urllib.request
