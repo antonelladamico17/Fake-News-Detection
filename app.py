@@ -125,9 +125,12 @@ def main():
 		for i, row in df.iterrows():
     			score = sid.polarity_scores(row[1])
     			polarity_Score.append(score)
+		polarity_Score = pd.DataFrame(polarity_Score)
+		df = pd.concat([df, polarity_Score], axis = 1)
+		df = df.drop(['compound'], axis = 1)
 				
 		st.text(str(df['title']))
-		st.text(str(df))
+		st.dataframe(df)
 		
 
 if __name__ == '__main__':
