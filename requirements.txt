@@ -4,3 +4,4 @@ unidecode
 nltk
 pandas
 parse
+text2emotion 
