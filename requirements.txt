@@ -3,3 +3,4 @@ urlopen
 unidecode
 nltk
 pandas
+urlparse
