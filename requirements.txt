@@ -6,3 +6,4 @@ pandas
 parse
 text2emotion 
 tldextract
+scikit-learn==0.24.2
