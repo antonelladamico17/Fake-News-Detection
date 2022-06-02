@@ -13,6 +13,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pickle
+from pathlib import Path
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -26,7 +27,7 @@ sid = SentimentIntensityAnalyzer()
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-Path = 'pickle'
+DATA_PATH = 'pickle'
 
 st.set_page_config(page_title="Fake News detector", layout="centered")
 
