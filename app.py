@@ -243,8 +243,8 @@ def main():
 				
 		st.write("Read more about 'How to spot Fake news' : [https://www.factcheck.org/2016/11/how-to-spot-fake-news/]")
 	
-	else :
-		st.text('Enter valid URL, please.')
+	else:
+		st.write('Enter valid URL, please.')
 				
 		
 
