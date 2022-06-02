@@ -154,97 +154,99 @@ def main():
 	if user_input!="" and (user_input.startswith('http://') or user_input.startswith('https://')):
 		try:
 			soup = BeautifulSoup(urlopen(user_input))
+
+
+			df = [user_input]
+			df = pd.DataFrame(df, columns = ['url'])
+			df['title'] = soup.title.get_text()
+
+			df['title'] = df['title'].apply(lambda x: clean_text(x))
+			df["parsed_url"] = df.url.apply(parse_url)
+			df = pd.concat([
+				df.drop(['parsed_url'], axis=1),
+				df['parsed_url'].apply(pd.Series)
+			], axis=1)
+
+			emotion_list = []
+			for i, row in df.iterrows():
+				emotion_dict = emotion_detection(row[1])
+				emotion_list.append(emotion_dict)
+			emotion_df = pd.DataFrame(emotion_list)
+			df = pd.concat([df, emotion_df], axis = 1)
+			polarity_Score = []
+			for i, row in df.iterrows():
+				score = sid.polarity_scores(row[1])
+				polarity_Score.append(score)
+			polarity_Score = pd.DataFrame(polarity_Score)
+			df = pd.concat([df, polarity_Score], axis = 1)
+			df = df.drop(['compound'], axis = 1)
+
+
+			df["length"] = df.url.str.len()
+			df["tld"] = df.netloc.apply(lambda nl: tldextract.extract(nl).suffix)
+			df['tld'] = df['tld'].replace('','None')
+			df['slashes'] = df.path.str.count('/')
+			df['digit'] = df.url.str.count('\d')
+			df['hypen'] = df.url.str.count('-')
+
+			df['num_subdomains'] = df['netloc'].apply(lambda net: get_num_subdomains(net))
+			df['domain_tokens'] = df['netloc'].apply(lambda net: tokenize_domain(net))
+			df['path_tokens'] = df['path'].apply(lambda path: " ".join(map(str,tokenizer.tokenize(path))))
+
+
+			df.drop('url', axis=1, inplace=True)
+			df.drop('scheme', axis=1, inplace=True)
+			df.drop('netloc', axis=1, inplace=True)
+			df.drop('path', axis=1, inplace=True)
+			df.drop('params', axis=1, inplace=True)
+			df.drop('query', axis=1, inplace=True)
+			df.drop('fragment', axis=1, inplace=True)
+			df.drop('title', axis = 1, inplace = True)
+
+			numeric_features = ['length', 'slashes', 'digit', 'hypen', 'Happy', 'Angry', 'Surprise', 'Sad', 'Fear', 'neg', 'neu', 'pos']
+			numeric_transformer = Pipeline(steps=[
+			    ('scaler', MinMaxScaler())])
+
+			categorical_features = ['tld']
+			categorical_transformer = Pipeline(steps=[
+			    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
+
+			vectorizer_features = ['domain_tokens','path_tokens', 'num_subdomains']
+			vectorizer_transformer = Pipeline(steps=[
+			    ('con', Converter()),
+			    ('tf', TfidfVectorizer())])
+
+			preprocessor = ColumnTransformer(
+			    transformers=[
+				('num', numeric_transformer, numeric_features),
+				('cat', categorical_transformer, categorical_features),
+				('domvec', vectorizer_transformer, ['domain_tokens']),
+				('pathvec', vectorizer_transformer, ['path_tokens'])
+			    ])
+
+
+			domain_fake, domain_real, model = get_data(DATA_PATH)
+
+
+
+			for i in range(len(df)):
+				if df['domain_tokens'][i] in list(domain_fake):
+					st.write('The URL domain appears to be registered as a domain that publishes fake news.\\Please be careful when reading this news, it may contain some false information.')
+				elif df['domain_tokens'][i] in list(domain_real):
+					st.write('Great! This domain is registered as a domain that publishes reliable news.\\Anyway, always be careful when reading the news online.')
+
+				else:
+					pred = model.predict(df)
+					if pred == 1:
+						st.write('This news may contain false information, please read it carefully')
+						st.write("Chek if this news is present here: [https://www.politifact.com/fake-news/]")
+					else:
+						st.write('This news is reliable')
+
+			st.write("Read more about 'How to spot Fake news' : [https://www.factcheck.org/2016/11/how-to-spot-fake-news/]")
+		
 		except:
 			st.text('test')
-		
-		df = [user_input]
-		df = pd.DataFrame(df, columns = ['url'])
-		df['title'] = soup.title.get_text()
-		
-		df['title'] = df['title'].apply(lambda x: clean_text(x))
-		df["parsed_url"] = df.url.apply(parse_url)
-		df = pd.concat([
-			df.drop(['parsed_url'], axis=1),
-			df['parsed_url'].apply(pd.Series)
-		], axis=1)
-		
-		emotion_list = []
-		for i, row in df.iterrows():
-    			emotion_dict = emotion_detection(row[1])
-    			emotion_list.append(emotion_dict)
-		emotion_df = pd.DataFrame(emotion_list)
-		df = pd.concat([df, emotion_df], axis = 1)
-		polarity_Score = []
-		for i, row in df.iterrows():
-    			score = sid.polarity_scores(row[1])
-    			polarity_Score.append(score)
-		polarity_Score = pd.DataFrame(polarity_Score)
-		df = pd.concat([df, polarity_Score], axis = 1)
-		df = df.drop(['compound'], axis = 1)
-		
-		
-		df["length"] = df.url.str.len()
-		df["tld"] = df.netloc.apply(lambda nl: tldextract.extract(nl).suffix)
-		df['tld'] = df['tld'].replace('','None')
-		df['slashes'] = df.path.str.count('/')
-		df['digit'] = df.url.str.count('\d')
-		df['hypen'] = df.url.str.count('-')
-		
-		df['num_subdomains'] = df['netloc'].apply(lambda net: get_num_subdomains(net))
-		df['domain_tokens'] = df['netloc'].apply(lambda net: tokenize_domain(net))
-		df['path_tokens'] = df['path'].apply(lambda path: " ".join(map(str,tokenizer.tokenize(path))))
-		
-		
-		df.drop('url', axis=1, inplace=True)
-		df.drop('scheme', axis=1, inplace=True)
-		df.drop('netloc', axis=1, inplace=True)
-		df.drop('path', axis=1, inplace=True)
-		df.drop('params', axis=1, inplace=True)
-		df.drop('query', axis=1, inplace=True)
-		df.drop('fragment', axis=1, inplace=True)
-		df.drop('title', axis = 1, inplace = True)
-		
-		numeric_features = ['length', 'slashes', 'digit', 'hypen', 'Happy', 'Angry', 'Surprise', 'Sad', 'Fear', 'neg', 'neu', 'pos']
-		numeric_transformer = Pipeline(steps=[
-		    ('scaler', MinMaxScaler())])
-
-		categorical_features = ['tld']
-		categorical_transformer = Pipeline(steps=[
-		    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
-
-		vectorizer_features = ['domain_tokens','path_tokens', 'num_subdomains']
-		vectorizer_transformer = Pipeline(steps=[
-		    ('con', Converter()),
-		    ('tf', TfidfVectorizer())])
-		
-		preprocessor = ColumnTransformer(
-		    transformers=[
-			('num', numeric_transformer, numeric_features),
-			('cat', categorical_transformer, categorical_features),
-			('domvec', vectorizer_transformer, ['domain_tokens']),
-			('pathvec', vectorizer_transformer, ['path_tokens'])
-		    ])
-		
-		
-		domain_fake, domain_real, model = get_data(DATA_PATH)
-		
-		
-		
-		for i in range(len(df)):
-			if df['domain_tokens'][i] in list(domain_fake):
-				st.write('The URL domain appears to be registered as a domain that publishes fake news.\\Please be careful when reading this news, it may contain some false information.')
-			elif df['domain_tokens'][i] in list(domain_real):
-				st.write('Great! This domain is registered as a domain that publishes reliable news.\\Anyway, always be careful when reading the news online.')
-			
-			else:
-				pred = model.predict(df)
-				if pred == 1:
-					st.write('This news may contain false information, please read it carefully')
-					st.write("Chek if this news is present here: [https://www.politifact.com/fake-news/]")
-				else:
-					st.write('This news is reliable')
-				
-		st.write("Read more about 'How to spot Fake news' : [https://www.factcheck.org/2016/11/how-to-spot-fake-news/]")
 	
 	else:
 		st.write('Enter valid URL, please.')
