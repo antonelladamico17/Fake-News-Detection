@@ -135,6 +135,15 @@ def main():
 	st.title("Fake News Detector")
 	st.write("__________________")
 	
+	st.sidebar.text('Credits:')
+	st.sidebar.text("""
+		Univesity of Milan
+		M.Sc. in Data Science and Economics
+		Thesis Title: Fighting against infodemic: Fake News detection in the Era of Covid-19
+		Antonella D'Amico - 961150
+		Academic Year: 2020/2021
+		""")
+	
 
 	user_input = st.text_input("Enter URL:")
 	submit = st.button('Check')
