@@ -139,7 +139,8 @@ def main():
 	st.sidebar.text("""
 		Univesity of Milan
 		M.Sc. in Data Science and Economics
-		Thesis Title: Fighting against infodemic: Fake News detection in the Era of Covid-19
+		Thesis Title: Fighting against infodemic: 
+		Fake News detection in the Era of Covid-19
 		Antonella D'Amico - 961150
 		Academic Year: 2020/2021
 		""")
