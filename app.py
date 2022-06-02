@@ -13,7 +13,9 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pickle
-from pathlib import Path
+#from pathlib import Path
+l = os.getcwd()
+
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -167,7 +169,7 @@ def main():
 		df.drop('fragment', axis=1, inplace=True)
 		df.drop('title', axis = 1, inplace = True)
 
-		domain_fake = pickle.load(open(Path("domain_fake.pkl"), "rb"))
+		domain_fake = pickle.load((l+"domain_fake.pkl"), "rb"))
 		domain_real = pickle.load(open(Path("domain_real.pkl"), "rb"))
 		model = pickle.load(open(Path("svc_clf.pkl"), "rb"))
 		
