@@ -140,7 +140,7 @@ def main():
 	user_input = st.text_input("Enter URL:")
 	
 	if user_input == '':
-		st.text('Enter valid URL, please)
+		st.text('Enter valid URL, please.')
 			
 	if submit and user_input!="":
 		soup = BeautifulSoup(urlopen(user_input))
