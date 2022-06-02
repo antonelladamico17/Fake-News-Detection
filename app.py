@@ -167,7 +167,7 @@ def main():
 		df.drop('fragment', axis=1, inplace=True)
 		df.drop('title', axis = 1, inplace = True)
 
-		domain_fake = pickle.load(open('domain_fake.pkl', "rb"))
+		domain_fake = pickle.load(open('fake-news-detection/pickle/domain_fake.pkl', "rb"))
 		domain_real = pickle.load(open(Path("domain_real.pkl"), "rb"))
 		model = pickle.load(open(Path("svc_clf.pkl"), "rb"))
 		
