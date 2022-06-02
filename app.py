@@ -134,11 +134,15 @@ class Converter(BaseEstimator, TransformerMixin):
 def main():
 	st.title("Fake News Detector")
 	st.write("__________________")
+	
+	submit = st.button('Check')
 
 	user_input = st.text_input("Enter URL:")
+	
 	if user_input == '':
-		st.text('Enter URL, plese')
-	else:
+		st.text('Enter valid URL, please)
+			
+	if submit and user_input!="":
 		soup = BeautifulSoup(urlopen(user_input))
 		
 		df = [user_input]
@@ -224,7 +228,6 @@ def main():
 				
 				
 				
-		st.dataframe(df)
 		
 
 if __name__ == '__main__':
