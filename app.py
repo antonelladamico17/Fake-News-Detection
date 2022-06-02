@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import pickle
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -24,6 +25,8 @@ sid = SentimentIntensityAnalyzer()
 
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+DATA_PATH = 'pickle'
 
 st.set_page_config(page_title="Fake News detector", layout="centered")
 
@@ -163,7 +166,17 @@ def main():
 		df.drop('fragment', axis=1, inplace=True)
 		df.drop('title', axis = 1, inplace = True)
 
+		domain_fake = pickle.load(open(Path(path, "domain_fake.pkl"), "rb"))
+		domain_real = pickle.load(open(Path(path, "domain_real.pkl"), "rb"))
+		model = pickle.load(open(Path(path, "svc_clf.pkl"), "rb"))
 		
+		for i in range(len(df)):
+  			if df['domain_tokens'][i] in list(domain_fake):
+    				st.text('Keep Attention!')
+  			elif df['domain_tokens'][i] in list(domain_real):
+    				st.text('Ok, it is safe')
+ 			else:
+    				st.text(svc_clf.predict(df))
 		st.dataframe(df)
 		
 
