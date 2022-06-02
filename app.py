@@ -152,7 +152,10 @@ def main():
 	
 			
 	if user_input!="" and (user_input.startswith('http://') or user_input.startswith('https://')):
-		soup = BeautifulSoup(urlopen(user_input))
+		try:
+			soup = BeautifulSoup(urlopen(user_input))
+		except:
+			st.text('test')
 		
 		df = [user_input]
 		df = pd.DataFrame(df, columns = ['url'])
