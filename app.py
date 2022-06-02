@@ -19,6 +19,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, MinMaxScaler
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer, TfidfVectorizer
 from imblearn.pipeline import Pipeline
+from sklearn.svm import SVC
 
 nltk.download('punkt')
 nltk.download('stopwords')
