@@ -13,7 +13,7 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pickle
-#from pathlib import Path
+from pathlib import Path
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -27,7 +27,7 @@ sid = SentimentIntensityAnalyzer()
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-#p = 'pickle'
+DATA_PATH = 'pickle'
 
 st.set_page_config(page_title="Fake News detector", layout="centered")
 
@@ -109,6 +109,13 @@ def tokenize_domain(netloc: str) -> str:
     return " ".join(map(str,tokenizer.tokenize(no_tld)))
 
 
+def get_data(path):
+	domain_fake = pickle.load(open(Path(path, 'domain_fake.pkl', "rb"))
+	domain_real = pickle.load(open(Path(path, "domain_real.pkl"), "rb"))
+	model = pickle.load(open(Path(path, "svc_clf.pkl"), "rb"))
+				  
+	return domain_fake, domain_real, model
+
 
 def main():
 	st.title("Fake News Detector")
@@ -167,9 +174,7 @@ def main():
 		df.drop('fragment', axis=1, inplace=True)
 		df.drop('title', axis = 1, inplace = True)
 
-		domain_fake = pickle.load(open('fake-news-detection/pickle/domain_fake.pkl', "rb"))
-		domain_real = pickle.load(open(Path("domain_real.pkl"), "rb"))
-		model = pickle.load(open(Path("svc_clf.pkl"), "rb"))
+		domain_fake, domain_real, model = get_data(DATA_PATH)
 		
 		for i in range(len(df)):
 			if df['domain_tokens'][i] in list(domain_fake):
