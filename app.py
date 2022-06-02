@@ -135,9 +135,9 @@ def main():
 	st.title("Fake News Detector")
 	st.write("__________________")
 	
-	submit = st.button('Check')
 
 	user_input = st.text_input("Enter URL:")
+	submit = st.button('Check')
 	
 	if user_input == '':
 		st.text('Enter valid URL, please.')
