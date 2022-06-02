@@ -158,7 +158,7 @@ def main():
 	submit = st.button('Check')
 	
 			
-	if user_input!="" and (user_input.startswith('http://') or user_input.startswith('https://')):
+	if submit and user_input!="" and (user_input.startswith('http://') or user_input.startswith('https://')):
 		try:
 			soup = BeautifulSoup(urlopen(user_input))
 
