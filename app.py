@@ -167,9 +167,9 @@ def main():
 		df.drop('fragment', axis=1, inplace=True)
 		df.drop('title', axis = 1, inplace = True)
 
-		domain_fake = pickle.load(open(Path(path, "domain_fake.pkl"), "rb"))
-		domain_real = pickle.load(open(Path(path, "domain_real.pkl"), "rb"))
-		model = pickle.load(open(Path(path, "svc_clf.pkl"), "rb"))
+		domain_fake = pickle.load(open(Path(Path, "domain_fake.pkl"), "rb"))
+		domain_real = pickle.load(open(Path(Path, "domain_real.pkl"), "rb"))
+		model = pickle.load(open(Path(Path, "svc_clf.pkl"), "rb"))
 		
 		for i in range(len(df)):
 			if df['domain_tokens'][i] in list(domain_fake):
