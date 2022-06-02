@@ -185,8 +185,6 @@ def main():
 		df.drop('query', axis=1, inplace=True)
 		df.drop('fragment', axis=1, inplace=True)
 		df.drop('title', axis = 1, inplace = True)
-
-		domain_fake, domain_real, model = get_data(DATA_PATH)
 		
 		numeric_features = ['length', 'slashes', 'digit', 'hypen', 'Happy', 'Angry', 'Surprise', 'Sad', 'Fear', 'neg', 'neu', 'pos']
 		numeric_transformer = Pipeline(steps=[
@@ -208,6 +206,11 @@ def main():
 			('domvec', vectorizer_transformer, ['domain_tokens']),
 			('pathvec', vectorizer_transformer, ['path_tokens'])
 		    ])
+		
+		
+		domain_fake, domain_real, model = get_data(DATA_PATH)
+		
+		
 		
 		for i in range(len(df)):
 			if df['domain_tokens'][i] in list(domain_fake):
