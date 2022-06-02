@@ -235,7 +235,8 @@ def main():
 				st.text('Ok, it is safe')
 			else:
 				pred = model.predict(df)
-				st.text(pred)
+				if pred == 1:
+					st.text('This news may contain false information, please read it carefully')
 				
 				
 				
