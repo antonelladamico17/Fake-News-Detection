@@ -230,13 +230,15 @@ def main():
 		
 		for i in range(len(df)):
 			if df['domain_tokens'][i] in list(domain_fake):
-				st.text('Keep Attention!')
+				st.text('The URL domain appears to be registered as a domain that publishes fake news. Please be careful when reading this news, it may contain some false information.')
 			elif df['domain_tokens'][i] in list(domain_real):
-				st.text('Ok, it is safe')
+				st.text('Great! This domain is registered as a domain that publishes reliable news. Anyway, always be careful when reading the news online.')
 			else:
 				pred = model.predict(df)
 				if pred == 1:
 					st.text('This news may contain false information, please read it carefully')
+				else:
+					st.text('This news is reliable')
 				
 				
 				
