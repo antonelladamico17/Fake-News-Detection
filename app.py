@@ -150,7 +150,7 @@ def main():
 	user_input = st.text_input("Enter URL:")
 	submit = st.button('Check')
 	
-	if user_input == '' and not user_input.startswith('http'):
+	if user_input == '' or not user_input.startswith('http'):
 		st.text('Enter valid URL, please.')
 			
 	if submit and user_input!="":
