@@ -15,6 +15,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pickle
 from pathlib import Path
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.compose import ColumnTransformer
 
 nltk.download('punkt')
 nltk.download('stopwords')
