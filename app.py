@@ -256,7 +256,7 @@ def main():
 			st.write('This URL ' + user_input + ' is not valid.')
 	
 	else:
-		st.write('Enter valid URL, please.')
+		st.write('Please, enter a valid URL.')
 				
 
 if __name__ == '__main__':
