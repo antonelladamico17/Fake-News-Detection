@@ -150,10 +150,8 @@ def main():
 	user_input = st.text_input("Enter URL:")
 	submit = st.button('Check')
 	
-	if user_input == '' or not user_input.startswith('http'):
-		st.text('Enter valid URL, please.')
 			
-	if submit and user_input!="":
+	if submit and user_input!="" and (user_input.startswith('http://') or user_input.stratswith('https://')):
 		soup = BeautifulSoup(urlopen(user_input))
 		
 		df = [user_input]
@@ -244,7 +242,9 @@ def main():
 					st.write('This news is reliable')
 				
 		st.write("Read more about 'How to spot Fake news' : [https://www.factcheck.org/2016/11/how-to-spot-fake-news/]")
-		
+	
+	else :
+		st.text('Enter valid URL, please.')
 				
 		
 
