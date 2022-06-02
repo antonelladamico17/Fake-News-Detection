@@ -137,11 +137,11 @@ def main():
 	
 	st.sidebar.write('Credits:')
 	st.sidebar.write("""
-		Univesity of Milan
-		M.Sc. in Data Science and Economics
-		Thesis Title: Fighting against infodemic: 
-		Fake News detection in the Era of Covid-19
-		Antonella D'Amico - 961150
+		Univesity of Milan\\
+		M.Sc. in Data Science and Economics\\
+		Thesis Title: Fighting against infodemic: \\
+		Fake News detection in the Era of Covid-19\\
+		Antonella D'Amico - 961150\\
 		Academic Year: 2020/2021
 		""")
 	
