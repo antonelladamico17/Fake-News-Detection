@@ -26,7 +26,7 @@ sid = SentimentIntensityAnalyzer()
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
-DATA_PATH = 'pickle'
+Path = 'pickle'
 
 st.set_page_config(page_title="Fake News detector", layout="centered")
 
