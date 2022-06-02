@@ -238,10 +238,12 @@ def main():
 				pred = model.predict(df)
 				if pred == 1:
 					st.text('This news may contain false information, please read it carefully')
+					st.write("Chek if this news is present here: [https://www.politifact.com/fake-news/]")
 				else:
 					st.text('This news is reliable')
 				
-				
+		st.write("Read more about 'How to spot Fake news' : [https://www.factcheck.org/2016/11/how-to-spot-fake-news/]")
+		
 				
 		
 
