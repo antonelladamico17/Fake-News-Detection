@@ -6,4 +6,3 @@ pandas
 parse
 text2emotion 
 tldextract
-pickle
