@@ -16,6 +16,7 @@ import pickle
 from pathlib import Path
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, MinMaxScaler
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -183,6 +184,27 @@ def main():
 		df.drop('title', axis = 1, inplace = True)
 
 		domain_fake, domain_real, model = get_data(DATA_PATH)
+		
+		numeric_features = ['length', 'slashes', 'digit', 'hypen', 'Happy', 'Angry', 'Surprise', 'Sad', 'Fear', 'neg', 'neu', 'pos']
+		numeric_transformer = Pipeline(steps=[
+		    ('scaler', MinMaxScaler())])
+
+		categorical_features = ['tld']
+		categorical_transformer = Pipeline(steps=[
+		    ('onehot', OneHotEncoder(handle_unknown='ignore'))])
+
+		vectorizer_features = ['domain_tokens','path_tokens', 'num_subdomains']
+		vectorizer_transformer = Pipeline(steps=[
+		    ('con', Converter()),
+		    ('tf', TfidfVectorizer())])
+		
+		preprocessor = ColumnTransformer(
+		    transformers=[
+			('num', numeric_transformer, numeric_features),
+			('cat', categorical_transformer, categorical_features),
+			('domvec', vectorizer_transformer, ['domain_tokens']),
+			('pathvec', vectorizer_transformer, ['path_tokens'])
+		    ])
 		
 		for i in range(len(df)):
 			if df['domain_tokens'][i] in list(domain_fake):
