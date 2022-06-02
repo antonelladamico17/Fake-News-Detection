@@ -246,7 +246,7 @@ def main():
 			st.write("Read more about 'How to spot Fake news' : [https://www.factcheck.org/2016/11/how-to-spot-fake-news/]")
 		
 		except:
-			st.text('This URL [user_input] is not valid.')
+			st.text('This URL' + [user_input] + 'is not valid.')
 	
 	else:
 		st.write('Enter valid URL, please.')
