@@ -110,7 +110,7 @@ def tokenize_domain(netloc: str) -> str:
 
 
 def get_data(path):
-	domain_fake = pickle.load(open(Path(path, 'domain_fake.pkl', "rb"))
+	domain_fake = pickle.load(open(Path(path, 'domain_fake.pkl'), "rb"))
 	domain_real = pickle.load(open(Path(path, "domain_real.pkl"), "rb"))
 	model = pickle.load(open(Path(path, "svc_clf.pkl"), "rb"))
 				  
