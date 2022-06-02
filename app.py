@@ -20,6 +20,8 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler, MinMaxScaler
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer, TfidfVectorizer
 from imblearn.pipeline import Pipeline
 from sklearn.svm import SVC
+from imblearn.over_sampling import SMOTE
+smote = SMOTE()
 
 nltk.download('punkt')
 nltk.download('stopwords')
