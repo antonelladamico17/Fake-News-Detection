@@ -134,7 +134,7 @@ class Converter(BaseEstimator, TransformerMixin):
 def main():
 	st.title("Fake News Detector")
 	st.write("__________________")
-	st.subheader("Check if the site you are visiting shares fake news.")
+	st.subheader("Check if the website you are visiting shares fake news.")
 	st.write("""
 		1. Paste the URL inside the box.
 		2. Click on the check button.
@@ -253,7 +253,7 @@ def main():
 			st.write("Read more about 'How to spot Fake news' : [https://www.factcheck.org/2016/11/how-to-spot-fake-news/]")
 		
 		except:
-			st.text('This URL ' + user_input + ' is not valid.')
+			st.write('This URL ' + user_input + ' is not valid.')
 	
 	else:
 		st.write('Enter valid URL, please.')
