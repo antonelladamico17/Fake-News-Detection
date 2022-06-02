@@ -189,7 +189,7 @@ def main():
 			elif df['domain_tokens'][i] in list(domain_real):
 				st.text('Ok, it is safe')
 			else:
-				st.text(svc_clf.predict(df))
+				st.text(model.predict(df))
 				
 				
 				
