@@ -139,7 +139,8 @@ def main():
 	st.sidebar.write("""
 		Univesity of Milan\\
 		M.Sc. in Data Science and Economics\\
-		Thesis Title: Fighting against infodemic: \\
+		Thesis Title:\\
+		Fighting against infodemic: \\
 		Fake News detection in the Era of Covid-19\\
 		Antonella D'Amico - 961150\\
 		Academic Year: 2020/2021
@@ -230,10 +231,12 @@ def main():
 		
 		for i in range(len(df)):
 			if df['domain_tokens'][i] in list(domain_fake):
-				st.write('The URL domain appears to be registered as a domain that publishes fake news. Please be careful when reading this news, it may contain some false information.')
+				st.write('The URL domain appears to be registered as a domain that publishes fake news.\\
+				Please be careful when reading this news, it may contain some false information.')
 			elif df['domain_tokens'][i] in list(domain_real):
-				st.write('Great! This domain is registered as a domain that publishes reliable news.')
-				st.write('Anyway, always be careful when reading the news online.')
+				st.write('Great! This domain is registered as a domain that publishes reliable news.\\
+					 Anyway, always be careful when reading the news online.')
+			
 			else:
 				pred = model.predict(df)
 				if pred == 1:
