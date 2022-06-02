@@ -251,7 +251,6 @@ def main():
 	else:
 		st.write('Enter valid URL, please.')
 				
-st.markdown('<style>body{background-color: Blue;}</style>',unsafe_allow_html=True)
 
 if __name__ == '__main__':
 	main()
