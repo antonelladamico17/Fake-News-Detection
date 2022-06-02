@@ -171,11 +171,11 @@ def main():
 		model = pickle.load(open(Path(path, "svc_clf.pkl"), "rb"))
 		
 		for i in range(len(df)):
-  			if df['domain_tokens'][i] in list(domain_fake):
-    				st.text('Keep Attention!')
-  			elif df['domain_tokens'][i] in list(domain_real):
-    				st.text('Ok, it is safe')
- 			else:
+			if df['domain_tokens'][i] in list(domain_fake):
+				st.text('Keep Attention!')
+			elif df['domain_tokens'][i] in list(domain_real):
+				st.text('Ok, it is safe')
+			else:
 				st.text(svc_clf.predict(df))
 				
 				
