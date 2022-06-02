@@ -14,6 +14,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pickle
 from pathlib import Path
+from sklearn.base import BaseEstimator, TransformerMixin
 
 nltk.download('punkt')
 nltk.download('stopwords')
