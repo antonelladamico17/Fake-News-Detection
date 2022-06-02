@@ -234,7 +234,8 @@ def main():
 			elif df['domain_tokens'][i] in list(domain_real):
 				st.text('Ok, it is safe')
 			else:
-				st.text(model.predict(df))
+				pred = model.predict(df)
+				st.text(pred)
 				
 				
 				
