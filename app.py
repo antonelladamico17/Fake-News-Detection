@@ -136,8 +136,8 @@ def main():
 	st.write("__________________")
 	st.subheader("Check if the site you are visiting shares fake news.")
 	st.write("""
-		1. Paste the URL inside the box.\\
-		2. Click on the check button.\\
+		1. Paste the URL inside the box.\
+		2. Click on the check button.\
 		3. Wait for the result
 		""")
 
