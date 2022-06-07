@@ -243,7 +243,7 @@ def main():
 				elif df['domain_tokens'][i] in list(domain_real):
 					st.write('Great! This domain is registered as a domain that publishes reliable news. Anyway, always be careful when reading the news online.')
 					image = Image.open('checked.png')
-					st.sidebar.image(image)
+					st.image(image)
 
 							   
 				else:
