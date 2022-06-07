@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from unidecode import unidecode
 from nltk.tokenize import word_tokenize, RegexpTokenizer
 import re
+from PIL import Image
 from urllib.parse import urlparse
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -241,7 +242,7 @@ def main():
 					st.write('The URL domain appears to be registered as a domain that publishes fake news. Please be careful when reading this news, it may contain some false information.')
 				elif df['domain_tokens'][i] in list(domain_real):
 					st.write('Great! This domain is registered as a domain that publishes reliable news. Anyway, always be careful when reading the news online.')
-					image = Image.open(checked.png')
+					image = Image.open('checked.png')
 					st.sidebar.image(image)
 
 							   
