@@ -244,6 +244,7 @@ def main():
 					image = Image.open(checked.png')
 					st.sidebar.image(image)
 
+							   
 				else:
 					pred = model.predict(df)
 					if pred == 1:
