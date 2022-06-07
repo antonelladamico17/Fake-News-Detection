@@ -135,10 +135,10 @@ class Converter(BaseEstimator, TransformerMixin):
 def main():
 	st.title("Fake News Detector")
 	st.write("__________________")
-	st.subheader("Check if the website you are visiting shares fake news.")
+	st.subheader("Check the URL website")
 	st.write("""
-		1. Paste the URL inside the box.
-		2. Click on the check button.
+		1. Paste the URL inside the box
+		2. Click on the check button
 		3. Wait for the result
 		""")
 
@@ -239,9 +239,9 @@ def main():
 
 			for i in range(len(df)):
 				if df['domain_tokens'][i] in list(domain_fake):
-					st.write('The URL domain appears to be registered as a domain that publishes fake news. Please be careful when reading this news, it may contain some false information.')
+					st.write('The URL domain is registered as a domain that publishes fake news. Please, be careful when reading this news, it may contain false information.')
 				elif df['domain_tokens'][i] in list(domain_real):
-					st.write('Great! This domain is registered as a domain that publishes reliable news. Anyway, always be careful when reading the news online.')
+					st.write('Great! This domain is registered in the safe list. Always read carefully the news online.')
 				
 
 							   
